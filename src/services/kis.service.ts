@@ -2,29 +2,33 @@ import * as dotenv from "dotenv";
 
 import axios from "axios";
 
-const baseURL = "https://cloud.iexapis.com/";
-const sandboxURL = "https://sandbox.iexapis.com/";
+const baseURL = "https://openapi.koreainvestment.com:9443";
+const testURL = "https://openapivts.koreainvestment.com:29443";
 
 // const baseSSEURL = "https://cloud.sse.iexapis.com/";
 
 dotenv.config();
 
-const pk = process.env.IEXCLOUD_PUBLIC_KEY;
-const apiversion = process.env.IEXCLOUD_API_VERSION;
+const appkey = process.env.KIS_APP_KEY;
+const appsecret = process.env.KIS_SECRET_KEY;
+const token = "";
 
-const prefix = () => {
-  return pk && pk[0] === "T" ? sandboxURL : baseURL;
+const prefix = (isTest?: boolean) => {
+  return isTest ? testURL : baseURL;
 };
 
 export const kisApiRequest = async (
   endpoint: string,
-  params = {}
+  params = {},
+  isTest?: boolean
 ): Promise<any> => {
   try {
-    const { data } = await axios.get(`${prefix()}${apiversion}${endpoint}`, {
+    const { data } = await axios.get(`${prefix(isTest)}${endpoint}`, {
       params: {
         ...params,
-        token: pk,
+        appkey,
+        appsecret,
+        token,
       },
     });
 
