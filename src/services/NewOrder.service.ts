@@ -1,4 +1,4 @@
-import { DynamicObject, kisApiRequest, KVP } from "./kis.service";
+import { DynamicObject, KVP, post } from "./kis.service";
 
 /**
  * newOrder
@@ -33,9 +33,10 @@ import { DynamicObject, kisApiRequest, KVP } from "./kis.service";
  * parameter ALGO_NO: optional string. 알고리즘번호 - 미사용
  */
 
-export const newOrder = async (): Promise<NewOrder> => {
-  const data: KVP = await kisApiRequest(
-    "/uapi/domestic-stock/v1/trading/order-cash"
+export const newOrder = async (params: NewOrder): Promise<NewOrder> => {
+  const data: KVP = await post(
+    "/uapi/domestic-stock/v1/trading/order-cash",
+    params
   );
   return new NewOrder(data);
 };
@@ -47,5 +48,4 @@ export class NewOrder extends DynamicObject {
   public ORD_DVSN: string;
   public ORD_QTY: string;
   public ORD_UNPR: string;
-  public ALGO_NO?: string;
 }
