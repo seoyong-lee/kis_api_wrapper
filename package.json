@@ -1,0 +1,36 @@
+{
+  "name": "kis_api_wrapper",
+  "version": "1.0.0",
+  "description": "JS wrapper for the KIS API",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seoyong-lee/kis_api_wrapper.git"
+  },
+  "keywords": [
+    "KIS",
+    "API-WRAPPER",
+    "FINANCIAL-DATA"
+  ],
+  "author": "Seoyong Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seoyong-lee/kis_api_wrapper/issues"
+  },
+  "homepage": "https://github.com/seoyong-lee/kis_api_wrapper#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.18.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}
