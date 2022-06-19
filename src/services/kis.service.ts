@@ -5,8 +5,6 @@ import axios from "axios";
 const baseURL = "https://openapi.koreainvestment.com:9443";
 const testURL = "https://openapivts.koreainvestment.com:29443";
 
-// const baseSSEURL = "https://cloud.sse.iexapis.com/";
-
 dotenv.config();
 
 const appkey = process.env.KIS_APP_KEY;
