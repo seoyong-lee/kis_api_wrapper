@@ -18,10 +18,13 @@ export class KIS {
   }
 
   balance(params) {
-    init(this.appkey, this.appsecret, this.isTest).then(data => {
+    return init(this.appkey, this.appsecret, this.isTest).then(data => {
       const headers = {
-        authorization: data.access_token,
         "Content-Type": "application/json; charset=utf-8",
+        authorization: `Bearer ${data.access_token}`,
+        appkey: this.appkey,
+        appsecret: this.appsecret,
+        tr_id: "VTTC8434R",
       };
 
       return balance(params, headers, this.isTest);
