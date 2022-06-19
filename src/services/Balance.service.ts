@@ -1,4 +1,4 @@
-import { DynamicObject, get, KVP } from "./kis.service";
+import { query } from "./kis.service";
 
 /**
  * balance
@@ -20,10 +20,11 @@ import { DynamicObject, get, KVP } from "./kis.service";
  * parameter CTX_AREA_NK100: string. 연속조회키100 - 공란 : 최초 조회시 / 이전 조회 Output CTX_AREA_NK100 값 : 다음페이지 조회시(2번째부터)
  */
 
-export const balance = async (params, isTest?): Promise<any> => {
-  const data: KVP = await get(
+export const balance = async (params, headers, isTest): Promise<any> => {
+  const data = await query(
     "/uapi/domestic-stock/v1/trading/inquire-balance",
     params,
+    headers,
     isTest
   );
   return data;
