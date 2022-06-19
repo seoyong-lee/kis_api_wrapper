@@ -25,6 +25,22 @@ export const init = async (
   }
 };
 
+export const getHashkey = async (
+  body = {},
+  headers = {},
+  isTest?: boolean
+): Promise<any> => {
+  try {
+    const { data } = await axios.post(`${prefix(isTest)}/uapi/hashkey`, body, {
+      headers,
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const query = async (
   endpoint: string,
   params = {},
@@ -57,11 +73,11 @@ export const request = async (
     const { data } = await axios.post(
       `${prefix(isTest)}${endpoint}`,
       {
-        params: {
-          ...params,
-        },
+        params,
       },
-      { headers }
+      {
+        headers: headers,
+      }
     );
 
     return data;

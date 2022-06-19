@@ -1,6 +1,6 @@
 import { request } from "./kis.service";
 
-export interface NewOrderParams {
+export interface CancelOrderParams {
   /**
    * 종합계좌번호 - 계좌번호 체계(8-2)의 앞 8자리
    */
@@ -10,9 +10,13 @@ export interface NewOrderParams {
    */
   ACNT_PRDT_CD: string;
   /**
-   * 종목코드(6자리)
+   * 한국거래소전송주문조직번호 - 주문시 한국투자증권 시스템에서 지정된 영업점코드
    */
-  PDNO: string;
+  KRX_FWDG_ORD_ORGNO: string;
+  /**
+   * 원주문번호 - 주문시 한국투자증권 시스템에서 채번된 주문번호
+   */
+  ORGN_ODNO: string;
   /**
    * 주문구분 -
    * 00 : 지정가
@@ -35,28 +39,36 @@ export interface NewOrderParams {
    */
   ORD_DVSN: string;
   /**
-   * 주문수량 - 주문주식수
+   * 정정취소구분코드 - 정정 : 01 / 취소 : 02
+   */
+  RVSE_CNCL_DVSN_CD: string;
+  /**
+   * 주문수량 - [잔량전부 주문] 원주문수량과 일치 / [잔량일부 주문] 취소/정정 수량
    */
   ORD_QTY: string;
   /**
-   * 주문단가 - 1주당 가격(장전 시간외, 장후 시간외, 시장가의 경우 1주당 가격을 공란으로 비우지 않음 "0"으로 입력 권고)
+   * 주문단가 - 정정인 경우는 정정주문 1주당 가격
    */
   ORD_UNPR: string;
+  /**
+   * 잔량전부주문여부 - Y : 잔량전부 / N : 잔량일부
+   */
+  QTY_ALL_ORD_YN: string;
 }
 
 /**
- * newOrder
- * 주식주문(현금)
+ * cancelOrder
+ * 주식예약주문정정취소
  *
- * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
+ * API endpoint: POST /uapi/domestic-stock/v1/trading/order-rvsecncl
  */
-export const newOrder = async (
-  params: NewOrderParams,
+export const cancelOrder = async (
+  params: CancelOrderParams,
   headers = {},
   isTest?: boolean
 ): Promise<unknown> => {
   const data = await request(
-    "/uapi/domestic-stock/v1/trading/order-cash",
+    "/uapi/domestic-stock/v1/trading/order-rvsecncl",
     params,
     headers,
     isTest
