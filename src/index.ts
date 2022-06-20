@@ -1,10 +1,12 @@
+import { BalanceParams, CancelOrderParams, NewOrderParams } from "./types";
 import { initialize } from "./services/kis.service";
-import { balance, BalanceParams } from "./services/Balance.service";
-import { newOrder, NewOrderParams } from "./services/NewOrder.service";
-import { cancelOrder, CancelOrderParams } from "./services/CancelOrder.service";
+import { balance } from "./services/Balance.service";
+import { newOrder } from "./services/NewOrder.service";
+import { cancelOrder } from "./services/CancelOrder.service";
 
 /**
- * Initialize.
+ * KIS
+ * 서비스 기본 클래스
  *
  * @param appkey UserConfig
  * @param appsecret UserConfig
