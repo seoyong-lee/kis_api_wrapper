@@ -1,6 +1,6 @@
 import { query } from "./kis.service";
 
-interface BalanceParams {
+export interface BalanceParams {
   /**
    * 종합계좌번호 - 계좌번호 체계(8-2)의 앞 8자리
    */
@@ -52,17 +52,28 @@ interface BalanceParams {
  * 주식잔고조회
  *
  * API endpoint: GET /uapi/domestic-stock/v1/trading/inquire-balance
+ *
+ * @param appkey 앱키
+ * @param appsecret 앱시크릿키
+ * @param token 접근토큰
+ * @param isTest 모의투자 여부
+ * @param params 요청값
  */
 export const balance = async (
-  params: BalanceParams,
-  headers = {},
-  isTest?: boolean
-): Promise<unknown> => {
+  appkey: string,
+  appsecret: string,
+  token: string,
+  isTest: boolean,
+  params: BalanceParams
+): Promise<any> => {
   const data = await query(
+    appkey,
+    appsecret,
+    token,
     "/uapi/domestic-stock/v1/trading/inquire-balance",
+    isTest,
     params,
-    headers,
-    isTest
+    {}
   );
   return data;
 };

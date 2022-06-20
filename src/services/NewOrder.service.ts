@@ -1,4 +1,4 @@
-import { request } from "./kis.service";
+import { getHashkey, request } from "./kis.service";
 
 export interface NewOrderParams {
   /**
@@ -49,17 +49,37 @@ export interface NewOrderParams {
  * 주식주문(현금)
  *
  * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
+ *
+ * @param appkey 앱키
+ * @param appsecret 앱시크릿키
+ * @param token 접근토큰
+ * @param isTest 모의투자 여부
+ * @param params 요청값
  */
 export const newOrder = async (
-  params: NewOrderParams,
-  headers = {},
-  isTest?: boolean
-): Promise<unknown> => {
+  appkey: string,
+  appsecret: string,
+  token: string,
+  isTest: boolean,
+  params: NewOrderParams
+): Promise<any> => {
+  const jsonBody = JSON.stringify(params);
+  const hashkey = getHashkey(appkey, appsecret, jsonBody, isTest).then(
+    res => res.HASH
+  );
+
+  const headers = {
+    hashkey: hashkey,
+  };
+
   const data = await request(
+    appkey,
+    appsecret,
+    token,
     "/uapi/domestic-stock/v1/trading/order-cash",
+    isTest,
     params,
-    headers,
-    isTest
+    headers
   );
   return data;
 };
