@@ -48,10 +48,8 @@ export interface BalanceParams {
 }
 
 /**
- * balance
+ * getBalance
  * 주식잔고조회
- *
- * API endpoint: GET /uapi/domestic-stock/v1/trading/inquire-balance
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -62,10 +60,13 @@ export interface BalanceParams {
 export const balance = async (
   appkey: string,
   appsecret: string,
-  token: string,
+  token: string | undefined,
   isTest: boolean,
   params: BalanceParams
 ): Promise<any> => {
+  if (!token) {
+    return;
+  }
   const data = await query(
     appkey,
     appsecret,

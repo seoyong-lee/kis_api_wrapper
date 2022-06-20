@@ -45,10 +45,8 @@ export interface NewOrderParams {
 }
 
 /**
- * newOrder
+ * createNewOrder
  * 주식주문(현금)
- *
- * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -59,10 +57,14 @@ export interface NewOrderParams {
 export const newOrder = async (
   appkey: string,
   appsecret: string,
-  token: string,
+  token: string | undefined,
   isTest: boolean,
   params: NewOrderParams
 ): Promise<any> => {
+  if (!token) {
+    return;
+  }
+
   const jsonBody = JSON.stringify(params);
   const hashkey = getHashkey(appkey, appsecret, jsonBody, isTest).then(
     res => res.HASH

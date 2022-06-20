@@ -1,6 +1,12 @@
 import axios from "axios";
 import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
 
+export interface InitResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
 /**
  * 접근토큰발급
  *
@@ -8,11 +14,11 @@ import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
  * @param appsecret 앱시크릿키
  * @param isTest 모의투자 여부
  */
-export const init = async (
+export const initialize = async (
   appkey: string,
   appsecret: string,
   isTest?: boolean
-): Promise<any> => {
+): Promise<InitResponse> => {
   try {
     const { data } = await axios.post(`${getUrlPrefix(isTest)}/oauth2/tokenP`, {
       grant_type: "client_credentials",
@@ -25,6 +31,11 @@ export const init = async (
     console.error(error);
   }
 };
+
+export interface GethashKeyResponse {
+  BODY: object;
+  HASH: string;
+}
 
 /**
  * Hashkey
@@ -39,7 +50,7 @@ export const getHashkey = async (
   appsecret: string,
   jsonBody = {},
   isTest: boolean
-): Promise<any> => {
+): Promise<GethashKeyResponse> => {
   const headers = {
     appkey,
     appsecret,
