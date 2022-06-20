@@ -1,4 +1,6 @@
-import { request } from "./kis.service";
+import axios from "axios";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
+import { getHashkey, request } from "./kis.service";
 
 export interface CancelOrderParams {
   /**
@@ -90,20 +92,27 @@ export const cancelOrder = async (
   appsecret: string,
   token: string | undefined,
   isTest: boolean,
-  params: CancelOrderParams,
-  headers = {}
+  params: CancelOrderParams
 ): Promise<CancelOrderResponse> => {
   if (!token) {
     return;
   }
-  const data: CancelOrderResponse = await request(
-    appkey,
-    appsecret,
-    token,
-    "/uapi/domestic-stock/v1/trading/order-rvsecncl",
-    isTest,
-    params,
-    headers
-  );
-  return data;
+
+  const headers = {
+    ...getHeaderBase(token, appkey, appsecret),
+    "tr_id": getTrId("calcelOrder", isTest),
+    "hashkey": (await getHashkey(appkey, appsecret, params, isTest)).HASH,
+  };
+
+  try {
+    const { data } = await axios.post(
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-rvsecncl`,
+      params,
+      { headers }
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };

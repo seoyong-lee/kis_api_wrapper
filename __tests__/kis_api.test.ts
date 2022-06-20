@@ -27,11 +27,11 @@ test("auth", async () => {
   expect(init).toEqual(expect.any(Object));
 });
 
-// test("balance", async () => {
-//   const getBalance = await client.balance(balanceData);
-//   console.log(getBalance);
-//   expect(getBalance).toEqual(expect.any(Object));
-// });
+test("balance", async () => {
+  const getBalance = await client.balance(balanceData);
+  console.log(getBalance);
+  expect(getBalance).toEqual(expect.any(Object));
+});
 
 test("newOrder", async () => {
   const postNewOrder = await client.newOrder(newOrderData);

@@ -1,3 +1,5 @@
+import axios from "axios";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
 import { query } from "./kis.service";
 
 export interface BalanceParams {
@@ -98,14 +100,23 @@ export const balance = async (
   if (!token) {
     return;
   }
-  const data: BalanceResponse = await query(
-    appkey,
-    appsecret,
-    token,
-    "/uapi/domestic-stock/v1/trading/inquire-balance",
-    isTest,
-    params,
-    {}
-  );
-  return data;
+
+  const headers = {
+    ...getHeaderBase(token, appkey, appsecret),
+    "tr_id": getTrId("balance", isTest),
+  };
+
+  try {
+    const { data } = await axios.get(
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/inquire-balance`,
+      {
+        params,
+        headers,
+      }
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };
