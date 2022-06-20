@@ -57,10 +57,10 @@ export class KIS {
     newOrder(this.appkey, this.appsecret, this.token, this.isTest, params);
 
   /**
-   * newOrder
-   * 주식주문(현금)
+   * cancelOrder
+   * 주식주문(정정취소)
    *
-   * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
+   * API endpoint: POST /uapi/domestic-stock/v1/trading/order-rvsecncl
    *
    * @param params 요청값
    */

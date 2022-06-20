@@ -77,7 +77,7 @@ export interface CancelOrderResponse {
 
 /**
  * cancelOrder
- * 주식예약주문정정취소
+ * 주식주문(정정취소)
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키

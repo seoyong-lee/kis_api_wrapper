@@ -1,3 +1,5 @@
+import axios from "axios";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
 import { getHashkey, request } from "./kis.service";
 
 export interface NewOrderParams {
@@ -84,23 +86,21 @@ export const newOrder = async (
     return;
   }
 
-  const jsonBody = JSON.stringify(params);
-  const hashkey = getHashkey(appkey, appsecret, jsonBody, isTest).then(
-    res => res.HASH
-  );
-
   const headers = {
-    hashkey: hashkey,
+    ...getHeaderBase(token, appkey, appsecret),
+    "tr_id": getTrId("newOrder", isTest),
+    "hashkey": (await getHashkey(appkey, appsecret, params, isTest)).HASH,
   };
 
-  const data: NewOrderResponse = await request(
-    appkey,
-    appsecret,
-    token,
-    "/uapi/domestic-stock/v1/trading/order-cash",
-    isTest,
-    params,
-    headers
-  );
-  return data;
+  try {
+    const { data } = await axios.post(
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-cash`,
+      params,
+      { headers }
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };

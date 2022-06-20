@@ -1,6 +1,6 @@
 module.exports = {
   semi: true,
-  trailingComma: "es5", 
+  trailingComma: "es5",
   singleQuote: false,
   printWidth: 80,
   tabWidth: 2,
@@ -8,4 +8,5 @@ module.exports = {
   arrowParens: "avoid",
   useTabs: false,
   formatOnSave: true,
+  quoteProps: "preserve",
 };

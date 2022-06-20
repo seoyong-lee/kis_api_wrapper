@@ -48,10 +48,11 @@ export interface GethashKeyResponse {
 export const getHashkey = async (
   appkey: string,
   appsecret: string,
-  jsonBody = {},
+  jsonBody: object,
   isTest: boolean
 ): Promise<GethashKeyResponse> => {
   const headers = {
+    "content-Type": "application/json",
     appkey,
     appsecret,
   };
