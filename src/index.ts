@@ -1,6 +1,7 @@
 import { initialize } from "./services/kis.service";
 import { balance, BalanceParams } from "./services/Balance.service";
 import { newOrder, NewOrderParams } from "./services/NewOrder.service";
+import { cancelOrder, CancelOrderParams } from "./services/CancelOrder.service";
 
 /**
  * Initialize.
@@ -54,4 +55,15 @@ export class KIS {
    */
   newOrder = (params: NewOrderParams) =>
     newOrder(this.appkey, this.appsecret, this.token, this.isTest, params);
+
+  /**
+   * newOrder
+   * 주식주문(현금)
+   *
+   * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
+   *
+   * @param params 요청값
+   */
+  cancelOrder = (params: CancelOrderParams) =>
+    cancelOrder(this.appkey, this.appsecret, this.token, this.isTest, params);
 }

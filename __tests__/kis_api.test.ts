@@ -11,6 +11,7 @@ const getDataFromJsonFile = (filename: string) =>
 
 const balanceData = getDataFromJsonFile("balance");
 const newOrderData = getDataFromJsonFile("new_order");
+const cancelOrderData = getDataFromJsonFile("cancel_order");
 
 dotenv.config();
 
@@ -26,11 +27,11 @@ test("auth", async () => {
   expect(init).toEqual(expect.any(Object));
 });
 
-// test("balance", async () => {
-//   const getBalance = await client.balance(balanceData);
-//   console.log(getBalance);
-//   expect(getBalance).toEqual(expect.any(Object));
-// });
+test("balance", async () => {
+  const getBalance = await client.balance(balanceData);
+  console.log(getBalance);
+  expect(getBalance).toEqual(expect.any(Object));
+});
 
 test("newOrder", async () => {
   const postNewOrder = await client.newOrder(newOrderData);
@@ -38,8 +39,8 @@ test("newOrder", async () => {
   expect(postNewOrder).toEqual(expect.any(Object));
 });
 
-// test("cancelOrder", async () => {
-//   const postCancelOrder = await client.cancelOrder(cancelOrderData);
-//   console.log(postCancelOrder);
-//   expect(postCancelOrder).toEqual(expect.any(Object));
-// });
+test("cancelOrder", async () => {
+  const postCancelOrder = await client.cancelOrder(cancelOrderData);
+  console.log(postCancelOrder);
+  expect(postCancelOrder).toEqual(expect.any(Object));
+});

@@ -56,22 +56,54 @@ export interface CancelOrderParams {
   QTY_ALL_ORD_YN: string;
 }
 
+export interface CancelOrderResponse {
+  /**
+   * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패
+   */
+  rt_cd: "0" | string;
+  /**
+   * 응답코드
+   */
+  msg_cd: string;
+  /**
+   * 응답메세지
+   */
+  msg1: string;
+  /**
+   * 응답상세
+   */
+  output: object[];
+}
+
 /**
  * cancelOrder
  * 주식예약주문정정취소
  *
- * API endpoint: POST /uapi/domestic-stock/v1/trading/order-rvsecncl
+ * @param appkey 앱키
+ * @param appsecret 앱시크릿키
+ * @param token 접근토큰
+ * @param isTest 모의투자 여부
+ * @param params 요청값
  */
 export const cancelOrder = async (
+  appkey: string,
+  appsecret: string,
+  token: string | undefined,
+  isTest: boolean,
   params: CancelOrderParams,
-  headers = {},
-  isTest?: boolean
-): Promise<unknown> => {
-  const data = await request(
+  headers = {}
+): Promise<CancelOrderResponse> => {
+  if (!token) {
+    return;
+  }
+  const data: CancelOrderResponse = await request(
+    appkey,
+    appsecret,
+    token,
     "/uapi/domestic-stock/v1/trading/order-rvsecncl",
+    isTest,
     params,
-    headers,
-    isTest
+    headers
   );
   return data;
 };

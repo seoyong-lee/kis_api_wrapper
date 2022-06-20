@@ -44,8 +44,27 @@ export interface NewOrderParams {
   ORD_UNPR: string;
 }
 
+export interface NewOrderResponse {
+  /**
+   * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패
+   */
+  rt_cd: "0" | string;
+  /**
+   * 응답코드
+   */
+  msg_cd: string;
+  /**
+   * 응답메세지
+   */
+  msg1: string;
+  /**
+   * 응답상세
+   */
+  output: object[];
+}
+
 /**
- * createNewOrder
+ * newOrder
  * 주식주문(현금)
  *
  * @param appkey 앱키
@@ -60,7 +79,7 @@ export const newOrder = async (
   token: string | undefined,
   isTest: boolean,
   params: NewOrderParams
-): Promise<any> => {
+): Promise<NewOrderResponse> => {
   if (!token) {
     return;
   }
@@ -74,7 +93,7 @@ export const newOrder = async (
     hashkey: hashkey,
   };
 
-  const data = await request(
+  const data: NewOrderResponse = await request(
     appkey,
     appsecret,
     token,

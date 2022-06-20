@@ -47,6 +47,37 @@ export interface BalanceParams {
   CTX_AREA_NK100: string;
 }
 
+export interface BalanceResponse {
+  /**
+   * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패
+   */
+  rt_cd: "0" | string;
+  /**
+   * 응답코드
+   */
+  msg_cd: string;
+  /**
+   * 응답메세지
+   */
+  msg1: string;
+  /**
+   * 연속조회검색조건100
+   */
+  CTX_AREA_FK100: string;
+  /**
+   * 연속조회키100
+   */
+  CTX_AREA_NK100: string;
+  /**
+   * 응답상세1
+   */
+  output1: object[];
+  /**
+   * 응답상세2
+   */
+  output2: object[];
+}
+
 /**
  * getBalance
  * 주식잔고조회
@@ -63,11 +94,11 @@ export const balance = async (
   token: string | undefined,
   isTest: boolean,
   params: BalanceParams
-): Promise<any> => {
+): Promise<BalanceResponse> => {
   if (!token) {
     return;
   }
-  const data = await query(
+  const data: BalanceResponse = await query(
     appkey,
     appsecret,
     token,
