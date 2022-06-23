@@ -1,6 +1,6 @@
 import axios from "axios";
-import { BalanceParams, BalanceResponse } from "../types";
-import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
+import { BalanceParams, BalanceResponse } from "../../types";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
 
 /**
  * getBalance

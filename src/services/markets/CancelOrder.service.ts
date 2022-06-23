@@ -1,11 +1,11 @@
 import axios from "axios";
-import { NewOrderParams, OrderResponse } from "../types";
-import { getHeaderBase, getTrId, getUrlPrefix } from "../utils";
-import { getHashkey } from "./kis.service";
+import { CancelOrderParams, OrderResponse } from "../../types";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
+import { getHashkey } from "../account/kis.service";
 
 /**
- * newOrder
- * 주식주문(현금)
+ * cancelOrder
+ * 주식주문(정정취소)
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -13,12 +13,12 @@ import { getHashkey } from "./kis.service";
  * @param isTest 모의투자 여부
  * @param params 요청값
  */
-export const newOrder = async (
+export const cancelOrder = async (
   appkey: string,
   appsecret: string,
   token: string | undefined,
   isTest: boolean,
-  params: NewOrderParams
+  params: CancelOrderParams
 ): Promise<OrderResponse> => {
   if (!token) {
     return;
@@ -26,13 +26,13 @@ export const newOrder = async (
 
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
-    "tr_id": getTrId("newOrder", isTest),
+    "tr_id": getTrId("cancelOrder", isTest),
     "hashkey": (await getHashkey(appkey, appsecret, params, isTest)).HASH,
   };
 
   try {
     const { data } = await axios.post(
-      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-cash`,
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-rvsecncl`,
       params,
       { headers }
     );

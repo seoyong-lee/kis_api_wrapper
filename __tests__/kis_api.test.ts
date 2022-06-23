@@ -39,8 +39,8 @@ test("newOrder", async () => {
   expect(postNewOrder).toEqual(expect.any(Object));
 });
 
-// test("cancelOrder", async () => {
-//   const postCancelOrder = await client.cancelOrder(cancelOrderData);
-//   console.log(postCancelOrder);
-//   expect(postCancelOrder).toEqual(expect.any(Object));
-// });
+test("cancelOrder", async () => {
+  const postCancelOrder = await client.cancelOrder(cancelOrderData);
+  console.log(postCancelOrder);
+  expect(postCancelOrder).toEqual(expect.any(Object));
+});

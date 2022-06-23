@@ -1,8 +1,8 @@
 import { BalanceParams, CancelOrderParams, NewOrderParams } from "./types";
-import { initialize } from "./services/kis.service";
-import { balance } from "./services/Balance.service";
-import { newOrder } from "./services/NewOrder.service";
-import { cancelOrder } from "./services/CancelOrder.service";
+import { initialize } from "./services/account/kis.service";
+import { balance } from "./services/account/Balance.service";
+import { newOrder } from "./services/markets/NewOrder.service";
+import { cancelOrder } from "./services/markets/CancelOrder.service";
 
 /**
  * KIS
