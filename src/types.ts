@@ -132,6 +132,53 @@ export interface CancelOrderParams extends Params {
   QTY_ALL_ORD_YN: string;
 }
 
+export interface NewOrderOverseasParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 종목코드(12자리)
+   */
+  PDNO: string;
+  /**
+   * 주문수량 - 주문주식수
+   */
+  ORD_QTY: string;
+  /**
+   * 해외주문단가 - 1주당 가격(시장가의 경우 1주당 가격을 공란으로 비우지 않음 "0"으로 입력 권고)
+   */
+  OVRS_ORD_UNPR: string;
+  /**
+   * 판매유형 - 제거 : 매수 / 00 : 매도
+   */
+  SLL_TYPE?: string;
+  /**
+   * [Header tr_id JTTT1002U (미국 매수 주문)]
+   * 00 : 지정가
+   * 32 : LOO(장개시지정가)
+   * 34 : LOC(장마감지정가)
+   *
+   * [Header tr_id JTTT1006U(미국 매도 주문)]
+   * 00 : 지정가
+   * 31 : MOD(장개시시장가)
+   * 32 : LOO(장개시지정가)
+   * 34 : LOC(장마감지정가)
+   *
+   * [Header tr_id JTTT1006U (홍콩 매도 주문)]
+   * 00 : 지정가
+   * 05 : 단주지정가 셋팅
+   */
+  ORD_DVSN?: string;
+}
+
 export interface Response {
   /**
    * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패

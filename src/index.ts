@@ -1,8 +1,14 @@
-import { BalanceParams, CancelOrderParams, NewOrderParams } from "./types";
+import {
+  BalanceParams,
+  CancelOrderParams,
+  NewOrderOverseasParams,
+  NewOrderParams,
+} from "./types";
 import { initialize } from "./services/account/kis.service";
 import { balance } from "./services/account/Balance.service";
 import { newOrder } from "./services/markets/NewOrder.service";
 import { cancelOrder } from "./services/markets/CancelOrder.service";
+import { newOrderOverseas } from "./services/markets_overseas/NewOrderOverseas.service";
 
 /**
  * KIS
@@ -16,7 +22,7 @@ export class KIS {
   appkey: string;
   appsecret: string;
   isTest?: boolean;
-  token: string | undefined;
+  private token: string | undefined;
 
   constructor(appkey: string, appsecret: string, isTest?: boolean) {
     this.appkey = appkey;
@@ -42,7 +48,7 @@ export class KIS {
    *
    * API endpoint: GET /uapi/domestic-stock/v1/trading/inquire-balance
    *
-   * @param params 요청값
+   * @param params 요청 값
    */
   balance = (params: BalanceParams) =>
     balance(this.appkey, this.appsecret, this.token, this.isTest, params);
@@ -53,7 +59,7 @@ export class KIS {
    *
    * API endpoint: POST /uapi/domestic-stock/v1/trading/order-cash
    *
-   * @param params 요청값
+   * @param params 요청 값
    */
   newOrder = (params: NewOrderParams) =>
     newOrder(this.appkey, this.appsecret, this.token, this.isTest, params);
@@ -64,8 +70,25 @@ export class KIS {
    *
    * API endpoint: POST /uapi/domestic-stock/v1/trading/order-rvsecncl
    *
-   * @param params 요청값
+   * @param params 요청 값
    */
   cancelOrder = (params: CancelOrderParams) =>
     cancelOrder(this.appkey, this.appsecret, this.token, this.isTest, params);
+
+  /**
+   * newOrderOverseas
+   * 해외주식주문
+   *
+   * API endpoint: POST /uapi/overseas-stock/v1/trading/order
+   *
+   * @param params 요청 값
+   */
+  newOrderOverseas = (params: NewOrderOverseasParams) =>
+    newOrderOverseas(
+      this.appkey,
+      this.appsecret,
+      this.token,
+      this.isTest,
+      params
+    );
 }
