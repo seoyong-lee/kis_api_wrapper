@@ -179,6 +179,36 @@ export interface NewOrderOverseasParams extends Params {
   ORD_DVSN?: string;
 }
 
+export interface NewReservedOrderOverseasParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 종목코드(12자리)
+   */
+  PDNO: string;
+  /**
+   * FT주문수량
+   */
+  FT_ORD_QTY: string;
+  /**
+   * FT주문단가3
+   */
+  FT_ORD_UNPR3: string;
+  /**
+   * 판매유형 - 제거 : 매수 / 00 : 매도
+   */
+  SLL_TYPE?: string;
+}
+
 export interface Response {
   /**
    * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패

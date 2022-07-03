@@ -13,6 +13,9 @@ const balanceData = getDataFromJsonFile("balance");
 const newOrderData = getDataFromJsonFile("new_order");
 const cancelOrderData = getDataFromJsonFile("cancel_order");
 const newOrderOverseasData = getDataFromJsonFile("new_order_overseas");
+const newReservedOrderOverseasData = getDataFromJsonFile(
+  "new_reserved_order_overseas"
+);
 
 dotenv.config();
 
@@ -52,4 +55,12 @@ test("newOrderOverseas", async () => {
   );
   console.log(postNewOrderOverseas);
   expect(postNewOrderOverseas).toEqual(expect.any(Object));
+});
+
+test("newReservedOrderOverseas", async () => {
+  const postNewReservedOrderOverseas = await client.newReservedOrderOverseas(
+    newReservedOrderOverseasData
+  );
+  console.log(postNewReservedOrderOverseas);
+  expect(postNewReservedOrderOverseas).toEqual(expect.any(Object));
 });

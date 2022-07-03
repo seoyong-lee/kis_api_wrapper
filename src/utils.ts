@@ -62,3 +62,14 @@ export function getTrIdForNewOrderOverseas(
     }
   }
 }
+
+export function getTrIdForNewReservedOrderOverseas(
+  orderType: string,
+  isTest: boolean
+) {
+  if (orderType === "00") {
+    return isTest ? "VTTT3016U" : "JTTT3016U";
+  } else {
+    return isTest ? "VTTT3014U" : "JTTT3014U";
+  }
+}

@@ -3,12 +3,14 @@ import {
   CancelOrderParams,
   NewOrderOverseasParams,
   NewOrderParams,
+  NewReservedOrderOverseasParams,
 } from "./types";
 import { initialize } from "./services/account/kis.service";
 import { balance } from "./services/account/Balance.service";
 import { newOrder } from "./services/markets/NewOrder.service";
 import { cancelOrder } from "./services/markets/CancelOrder.service";
 import { newOrderOverseas } from "./services/markets_overseas/NewOrderOverseas.service";
+import { newReservedOrderOverseas } from "./services/markets_overseas/NewReservedOrderOverseas.service";
 
 /**
  * KIS
@@ -85,6 +87,23 @@ export class KIS {
    */
   newOrderOverseas = (params: NewOrderOverseasParams) =>
     newOrderOverseas(
+      this.appkey,
+      this.appsecret,
+      this.token,
+      this.isTest,
+      params
+    );
+
+  /**
+   * newReservedOrderOverseas
+   * 해외주식 예약주문접수
+   *
+   * API endpoint: POST /uapi/overseas-stock/v1/trading/order-resv
+   *
+   * @param params 요청 값
+   */
+  newReservedOrderOverseas = (params: NewReservedOrderOverseasParams) =>
+    newReservedOrderOverseas(
       this.appkey,
       this.appsecret,
       this.token,
