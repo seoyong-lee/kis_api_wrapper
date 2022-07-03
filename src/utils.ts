@@ -18,7 +18,7 @@ export function getHeaderBase(
   };
 }
 
-export function getTrId(endpoint: string, isTest: boolean) {
+export function getTrId(endpoint: string, isTest?: boolean) {
   switch (endpoint) {
     case "balance":
       return isTest ? "VTTC8434R" : "TTTC8434R";
@@ -26,6 +26,10 @@ export function getTrId(endpoint: string, isTest: boolean) {
       return isTest ? "VTTC0802U" : "TTTC0802U";
     case "cancelOrder":
       return isTest ? "VTTC0803U" : "TTTC0803U";
+    case "overseasBalance":
+      return isTest ? "VTTS3012R" : "TTTS3012R";
+    case "overseasDayOrNight":
+      return "JTTT3010R";
   }
 }
 
@@ -71,5 +75,16 @@ export function getTrIdForNewReservedOrderOverseas(
     return isTest ? "VTTT3016U" : "JTTT3016U";
   } else {
     return isTest ? "VTTT3014U" : "JTTT3014U";
+  }
+}
+
+export function getTrIdForOverseasBalance(
+  isNighttime: string,
+  isTest: boolean
+) {
+  if (isNighttime === "Y") {
+    return isTest ? "VTTT3012R" : "JTTT3012R";
+  } else if (isNighttime === "N") {
+    return isTest ? "VTTS3012R" : "TTTS3012R";
   }
 }

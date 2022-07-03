@@ -209,6 +209,40 @@ export interface NewReservedOrderOverseasParams extends Params {
   SLL_TYPE?: string;
 }
 
+export interface OverseasBalanceParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 미국전체
+   * NAS : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 거래통화코드 -
+   * USD : 미국달러
+   * HKD : 홍콩달러
+   * CNY : 중국위안화
+   * JPY : 일본엔화
+   * VND : 베트남동
+   */
+  TR_CRCY_CD: string;
+  /**
+   * 연속조회검색조건200 - 최초 조회시는 공란
+   * 다음페이지 조회시(2번째부터) 이전 조회 Output CTX_AREA_FK200 값 그대로 셋팅
+   */
+  CTX_AREA_FK200: string;
+  /**
+   * 연속조회키200 - 최초 조회시는 공란
+   * 다음페이지 조회시(2번째부터) 이전 조회 Output CTX_AREA_NK200 값 그대로 셋팅
+   */
+  CTX_AREA_NK200: string;
+}
+
 export interface Response {
   /**
    * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패
@@ -243,9 +277,35 @@ export interface BalanceResponse extends Response {
   output2: object[];
 }
 
+export interface OverseasBalanceResponse extends Response {
+  /**
+   * 연속조회검색조건200
+   */
+  CTX_AREA_FK200: string;
+  /**
+   * 연속조회키200
+   */
+  CTX_AREA_NK200: string;
+  /**
+   * 응답상세1
+   */
+  output1: object[];
+  /**
+   * 응답상세2
+   */
+  output2: object[];
+}
+
 export interface OrderResponse extends Response {
   /**
    * 응답상세
    */
   output: object[];
+}
+
+export interface GetOverseasDayOrNightResponse extends Response {
+  /**
+   * 응답상세
+   */
+  output: { "PSBL_YN": string };
 }

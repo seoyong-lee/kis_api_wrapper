@@ -16,6 +16,7 @@ const newOrderOverseasData = getDataFromJsonFile("new_order_overseas");
 const newReservedOrderOverseasData = getDataFromJsonFile(
   "new_reserved_order_overseas"
 );
+const overseasBalanceData = getDataFromJsonFile("overseas_balance");
 
 dotenv.config();
 
@@ -63,4 +64,16 @@ test("newReservedOrderOverseas", async () => {
   );
   console.log(postNewReservedOrderOverseas);
   expect(postNewReservedOrderOverseas).toEqual(expect.any(Object));
+});
+
+test("overseasBalance", async () => {
+  const getOverseasBalance = await client.overseasBalance(overseasBalanceData);
+  console.log(getOverseasBalance);
+  expect(getOverseasBalance).toEqual(expect.any(Object));
+});
+
+test("overseasDayOrNight", async () => {
+  const getOverseasDayOrNight = await client.overseasDayOrNight();
+  console.log(getOverseasDayOrNight);
+  expect(getOverseasDayOrNight).toEqual(expect.any(Object));
 });
