@@ -27,7 +27,7 @@ export const cancelOrder = async (
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
     "tr_id": getTrId("cancelOrder", isTest),
-    "hashkey": (await getHashkey(appkey, appsecret, params, isTest)).HASH,
+    "hashkey": await getHashkey(appkey, appsecret, params, isTest),
   };
 
   try {

@@ -27,7 +27,7 @@ export const newOrder = async (
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
     "tr_id": getTrId("newOrder", isTest),
-    "hashkey": (await getHashkey(appkey, appsecret, params, isTest)).HASH,
+    "hashkey": await getHashkey(appkey, appsecret, params, isTest),
   };
 
   try {

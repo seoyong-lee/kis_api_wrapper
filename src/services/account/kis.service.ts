@@ -50,7 +50,7 @@ export const getHashkey = async (
   appsecret: string,
   jsonBody: object,
   isTest: boolean
-): Promise<GethashKeyResponse> => {
+): Promise<string> => {
   const headers = {
     "content-Type": "application/json",
     appkey,
@@ -66,7 +66,7 @@ export const getHashkey = async (
       }
     );
 
-    return data;
+    return data.HASH;
   } catch (error) {
     console.error(error);
   }
