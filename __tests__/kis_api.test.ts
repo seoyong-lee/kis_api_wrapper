@@ -11,6 +11,7 @@ const getDataFromJsonFile = (filename: string) =>
 
 const balanceData = getDataFromJsonFile("balance");
 const tickerPriceData = getDataFromJsonFile("ticker_price");
+const tickerDailyPriceData = getDataFromJsonFile("ticker_daily_price");
 const newOrderData = getDataFromJsonFile("new_order");
 const cancelOrderData = getDataFromJsonFile("cancel_order");
 const newOrderOverseasData = getDataFromJsonFile("new_order_overseas");
@@ -43,6 +44,14 @@ test("tickerPrice", async () => {
   const getTickerPrice = await client.tickerPrice(tickerPriceData);
   console.log(getTickerPrice);
   expect(getTickerPrice).toEqual(expect.any(Object));
+});
+
+test("tickerDailyPrice", async () => {
+  const getTickerDailyPrice = await client.tickerDailyPrice(
+    tickerDailyPriceData
+  );
+  console.log(getTickerDailyPrice);
+  expect(getTickerDailyPrice).toEqual(expect.any(Object));
 });
 
 test("newOrder", async () => {

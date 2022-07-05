@@ -5,6 +5,7 @@ import {
   NewOrderParams,
   NewReservedOrderOverseasParams,
   OverseasBalanceParams,
+  TickerDailyPriceParams,
   TickerPriceParams,
 } from "./types";
 import { GetTokenResponse, getToken } from "./services/account/getToken";
@@ -16,6 +17,7 @@ import { newReservedOrderOverseas } from "./services/orders_overseas/NewReserved
 import { getOverseasBalance } from "./services/account/getOverseasBalance";
 import { getOverseasDayOrNight } from "./services/account/getOverseasDayOrNight";
 import { getTickerPrice } from "./services/markets/getTickerPrice";
+import { getTickerDailyPrice } from "./services/markets/getTickerDailyPrice";
 
 /**
  * KIS
@@ -72,6 +74,23 @@ export class KIS {
    */
   tickerPrice = (params: TickerPriceParams) =>
     getTickerPrice(
+      this.appkey,
+      this.appsecret,
+      this.token,
+      this.isTest,
+      params
+    );
+
+  /**
+   * tickerDailyPrice
+   * 주식현재가 일자별
+   *
+   * API endpoint: GET /uapi/domestic-stock/v1/quotations/inquire-daily-price
+   *
+   * @param params 요청 값
+   */
+  tickerDailyPrice = (params: TickerDailyPriceParams) =>
+    getTickerDailyPrice(
       this.appkey,
       this.appsecret,
       this.token,

@@ -59,6 +59,23 @@ export interface TickerPriceParams {
   FID_INPUT_ISCD: string;
 }
 
+export interface TickerDailyPriceParams extends TickerPriceParams {
+  /**
+   * FID 기간 분류 코드 -
+   * D : (일)최근 30거래일
+   * W : (주)최근 30주
+   * M : (월)최근 30개월
+   */
+  FID_PERIOD_DIV_CODE: string;
+  /**
+   * FID 수정주가 원주가 가격 -
+   * 0 : 수정주가반영
+   * 1 : 수정주가미반영
+   * (수정주가는 액면분할/액면병합 등 권리 발생 시 과거 시세를 현재 주가에 맞게 보정한 가격)
+   */
+  FID_ORG_ADJ_PRC: string;
+}
+
 export interface NewOrderParams extends Params {
   /**
    * 종목코드(6자리)
@@ -269,11 +286,18 @@ export interface Response {
   msg1: string;
 }
 
-export interface PriceResponse extends Response {
+export interface TickerPriceResponse extends Response {
   /**
    * 응답상세
    */
   output: object;
+}
+
+export interface TickerDailyPriceResponse extends Response {
+  /**
+   * 응답상세
+   */
+  output: object[];
 }
 
 export interface BalanceResponse extends Response {
