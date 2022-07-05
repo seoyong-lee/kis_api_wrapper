@@ -10,10 +10,10 @@ import {
 } from "./types";
 import { GetTokenResponse, getToken } from "./services/account/getToken";
 import { getBalance } from "./services/account/getBalance";
-import { newOrder } from "./services/orders/NewOrder";
+import { newOrder } from "./services/orders/newOrder";
 import { cancelOrder } from "./services/orders/cancelOrder";
-import { newOrderOverseas } from "./services/orders_overseas/NewOrderOverseas";
-import { newReservedOrderOverseas } from "./services/orders_overseas/NewReservedOrderOverseas";
+import { newOrderOverseas } from "./services/orders_overseas/newOrderOverseas";
+import { newReservedOrderOverseas } from "./services/orders_overseas/newReservedOrderOverseas";
 import { getOverseasBalance } from "./services/account/getOverseasBalance";
 import { getOverseasDayOrNight } from "./services/account/getOverseasDayOrNight";
 import { getTickerPrice } from "./services/markets/getTickerPrice";
