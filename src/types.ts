@@ -48,6 +48,17 @@ export interface BalanceParams extends Params {
   CTX_AREA_NK100: string;
 }
 
+export interface TickerPriceParams {
+  /**
+   * FID 조건 시장 분류 코드 -	J : 주식, ETF, ETN
+   */
+  FID_COND_MRKT_DIV_CODE: string;
+  /**
+   * FID 입력 종목코드 - 종목번호 (6자리)
+   */
+  FID_INPUT_ISCD: string;
+}
+
 export interface NewOrderParams extends Params {
   /**
    * 종목코드(6자리)
@@ -315,15 +326,4 @@ export interface GetOverseasDayOrNightResponse extends Response {
    * 응답상세
    */
   output: { "PSBL_YN": string };
-}
-
-export interface tickerPriceParams {
-  /**
-   * FID 조건 시장 분류 코드 -	J : 주식, ETF, ETN
-   */
-  FID_COND_MRKT_DIV_CODE: string;
-  /**
-   * FID 입력 종목코드 - 종목번호 (6자리)
-   */
-  FID_INPUT_ISCD: string;
 }

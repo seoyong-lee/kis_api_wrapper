@@ -5,7 +5,7 @@ import {
   NewOrderParams,
   NewReservedOrderOverseasParams,
   OverseasBalanceParams,
-  tickerPriceParams,
+  TickerPriceParams,
 } from "./types";
 import { GetTokenResponse, getToken } from "./services/account/getToken";
 import { getBalance } from "./services/account/getBalance";
@@ -70,7 +70,7 @@ export class KIS {
    *
    * @param params 요청 값
    */
-  tickerPrice = (params: tickerPriceParams) =>
+  tickerPrice = (params: TickerPriceParams) =>
     getTickerPrice(
       this.appkey,
       this.appsecret,
