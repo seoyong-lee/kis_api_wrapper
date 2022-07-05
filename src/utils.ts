@@ -22,6 +22,8 @@ export function getTrId(endpoint: string, isTest?: boolean) {
   switch (endpoint) {
     case "balance":
       return isTest ? "VTTC8434R" : "TTTC8434R";
+    case "possibleOrder":
+      return isTest ? "VTTC8908R" : "TTTC8908R";
     case "newOrder":
       return isTest ? "VTTC0802U" : "TTTC0802U";
     case "cancelOrder":

@@ -1,11 +1,10 @@
 import axios from "axios";
-import { NewOrderParams, OrderResponse } from "../../types";
+import { BalanceParams, BalanceResponse } from "../../types";
 import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
-import { getHashkey } from "../account/GetHashkey.service";
 
 /**
- * newOrder
- * 주식주문(현금)
+ * getBalance
+ * 주식잔고조회
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -13,28 +12,29 @@ import { getHashkey } from "../account/GetHashkey.service";
  * @param isTest 모의투자 여부
  * @param params 요청값
  */
-export const newOrder = async (
+export const getBalance = async (
   appkey: string,
   appsecret: string,
   token: string | undefined,
   isTest: boolean,
-  params: NewOrderParams
-): Promise<OrderResponse> => {
+  params: BalanceParams
+): Promise<BalanceResponse> => {
   if (!token) {
     return;
   }
 
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
-    "tr_id": getTrId("newOrder", isTest),
-    "hashkey": await getHashkey(appkey, appsecret, params, isTest),
+    "tr_id": getTrId("balance", isTest),
   };
 
   try {
-    const { data } = await axios.post(
-      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-cash`,
-      params,
-      { headers }
+    const { data } = await axios.get(
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/inquire-balance`,
+      {
+        params,
+        headers,
+      }
     );
 
     return data;

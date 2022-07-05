@@ -5,7 +5,7 @@ import {
   getTrIdForNewReservedOrderOverseas,
   getUrlPrefix,
 } from "../../utils";
-import { getHashkey } from "../account/GetHashkey.service";
+import { getHashkey } from "../account/getHashkey";
 
 /**
  * newReservedOrderOverseas
