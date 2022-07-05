@@ -76,6 +76,56 @@ export interface TickerDailyPriceParams extends TickerPriceParams {
   FID_ORG_ADJ_PRC: string;
 }
 
+export interface PossibleOrderParams extends Params {
+  /**
+   * 종목코드(6자리)
+   */
+  PDNO: string;
+  /**
+   * 주문단가 - 1주당 가격
+   */
+  ORD_UNPR: string;
+  /**
+   * 주문구분 -
+   * 00 : 지정가
+   * 01 : 시장가
+   * 02 : 조건부지정가
+   * 03 : 최유리지정가
+   * 04 : 최우선지정가
+   * 05 : 장전 시간외
+   * 06 : 장후 시간외
+   * 07 : 시간외 단일가
+   * 08 : 자기주식
+   * 09 : 자기주식S-Option
+   * 10 : 자기주식금전신탁
+   * 11 : IOC지정가 (즉시체결,잔량취소)
+   * 12 : FOK지정가 (즉시체결,전량취소)
+   * 13 : IOC시장가 (즉시체결,잔량취소)
+   * 14 : FOK시장가 (즉시체결,전량취소)
+   * 15 : IOC최유리 (즉시체결,잔량취소)
+   * 16 : FOK최유리 (즉시체결,전량취소)
+   * 51 : 장중대량
+   * 52 : 장중바스켓
+   * 62 : 장개시전 시간외대량
+   * 63 : 장개시전 시간외바스켓
+   * 67 : 장개시전 금전신탁자사주
+   * 69 : 장개시전 자기주식
+   * 72 : 시간외대량
+   * 77 : 시간외자사주신탁
+   * 79 : 시간외대량자기주식
+   * 80 : 바스켓
+   */
+  ORD_DVSN: string;
+  /**
+   * CMA평가금액포함여부 - Y : 포함 / N : 포함하지 않음
+   */
+  CMA_EVLU_AMT_ICLD_YN: string;
+  /**
+   * 해외포함여부 - Y : 포함 / N : 포함하지 않음
+   */
+  OVRS_ICLD_YN: string;
+}
+
 export interface NewOrderParams extends Params {
   /**
    * 종목코드(6자리)
@@ -286,7 +336,7 @@ export interface Response {
   msg1: string;
 }
 
-export interface TickerPriceResponse extends Response {
+export interface SingleResponse extends Response {
   /**
    * 응답상세
    */

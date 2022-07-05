@@ -1,10 +1,10 @@
 import axios from "axios";
-import { SingleResponse, TickerPriceParams } from "../../types";
-import { getHeaderBase, getUrlPrefix } from "../../utils";
+import { BalanceParams, BalanceResponse } from "../../types";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
 
 /**
- * getTickerPrice
- * 주식현재가 시세
+ * getBalance
+ * 주식잔고조회
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -12,25 +12,25 @@ import { getHeaderBase, getUrlPrefix } from "../../utils";
  * @param isTest 모의투자 여부
  * @param params 요청값
  */
-export const getTickerPrice = async (
+export const getBalance = async (
   appkey: string,
   appsecret: string,
   token: string | undefined,
   isTest: boolean,
-  params: TickerPriceParams
-): Promise<SingleResponse> => {
+  params: BalanceParams
+): Promise<BalanceResponse> => {
   if (!token) {
     return;
   }
 
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
-    "tr_id": "FHKST01010100",
+    "tr_id": getTrId("balance", isTest),
   };
 
   try {
     const { data } = await axios.get(
-      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/quotations/inquire-price`,
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/inquire-balance`,
       {
         params,
         headers,

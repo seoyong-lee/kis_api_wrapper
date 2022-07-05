@@ -5,6 +5,7 @@ import {
   NewOrderParams,
   NewReservedOrderOverseasParams,
   OverseasBalanceParams,
+  PossibleOrderParams,
   TickerDailyPriceParams,
   TickerPriceParams,
 } from "./types";
@@ -18,6 +19,7 @@ import { getOverseasBalance } from "./services/account/getOverseasBalance";
 import { getOverseasDayOrNight } from "./services/account/getOverseasDayOrNight";
 import { getTickerPrice } from "./services/markets/getTickerPrice";
 import { getTickerDailyPrice } from "./services/markets/getTickerDailyPrice";
+import { getPossibleOrder } from "./services/orders/getPossibleOrder";
 
 /**
  * KIS
@@ -91,6 +93,23 @@ export class KIS {
    */
   tickerDailyPrice = (params: TickerDailyPriceParams) =>
     getTickerDailyPrice(
+      this.appkey,
+      this.appsecret,
+      this.token,
+      this.isTest,
+      params
+    );
+
+  /**
+   * possibleOrder
+   * 매수가능조회
+   *
+   * API endpoint: GET /uapi/domestic-stock/v1/trading/inquire-psbl-order
+   *
+   * @param params 요청 값
+   */
+  possibleOrder = (params: PossibleOrderParams) =>
+    getPossibleOrder(
       this.appkey,
       this.appsecret,
       this.token,
