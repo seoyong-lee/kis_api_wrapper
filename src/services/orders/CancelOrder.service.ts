@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CancelOrderParams, OrderResponse } from "../../types";
 import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
-import { getHashkey } from "../account/kis.service";
+import { getHashkey } from "../account/GetHashkey.service";
 
 /**
  * cancelOrder

@@ -132,6 +132,117 @@ export interface CancelOrderParams extends Params {
   QTY_ALL_ORD_YN: string;
 }
 
+export interface NewOrderOverseasParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 종목코드(12자리)
+   */
+  PDNO: string;
+  /**
+   * 주문수량 - 주문주식수
+   */
+  ORD_QTY: string;
+  /**
+   * 해외주문단가 - 1주당 가격(시장가의 경우 1주당 가격을 공란으로 비우지 않음 "0"으로 입력 권고)
+   */
+  OVRS_ORD_UNPR: string;
+  /**
+   * 판매유형 - 제거 : 매수 / 00 : 매도
+   */
+  SLL_TYPE?: string;
+  /**
+   * [Header tr_id JTTT1002U (미국 매수 주문)]
+   * 00 : 지정가
+   * 32 : LOO(장개시지정가)
+   * 34 : LOC(장마감지정가)
+   *
+   * [Header tr_id JTTT1006U(미국 매도 주문)]
+   * 00 : 지정가
+   * 31 : MOD(장개시시장가)
+   * 32 : LOO(장개시지정가)
+   * 34 : LOC(장마감지정가)
+   *
+   * [Header tr_id JTTT1006U (홍콩 매도 주문)]
+   * 00 : 지정가
+   * 05 : 단주지정가 셋팅
+   */
+  ORD_DVSN?: string;
+}
+
+export interface NewReservedOrderOverseasParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 종목코드(12자리)
+   */
+  PDNO: string;
+  /**
+   * FT주문수량
+   */
+  FT_ORD_QTY: string;
+  /**
+   * FT주문단가3
+   */
+  FT_ORD_UNPR3: string;
+  /**
+   * 판매유형 - 제거 : 매수 / 00 : 매도
+   */
+  SLL_TYPE?: string;
+}
+
+export interface OverseasBalanceParams extends Params {
+  /**
+   * 해외거래소코드 -
+   * NASD : 미국전체
+   * NAS : 나스닥
+   * NYSE : 뉴욕
+   * AMEX : 아멕스
+   * SEHK : 홍콩
+   * SHAA : 중국상해
+   * SZAA : 중국심천
+   * TKSE : 일본
+   */
+  OVRS_EXCG_CD: string;
+  /**
+   * 거래통화코드 -
+   * USD : 미국달러
+   * HKD : 홍콩달러
+   * CNY : 중국위안화
+   * JPY : 일본엔화
+   * VND : 베트남동
+   */
+  TR_CRCY_CD: string;
+  /**
+   * 연속조회검색조건200 - 최초 조회시는 공란
+   * 다음페이지 조회시(2번째부터) 이전 조회 Output CTX_AREA_FK200 값 그대로 셋팅
+   */
+  CTX_AREA_FK200: string;
+  /**
+   * 연속조회키200 - 최초 조회시는 공란
+   * 다음페이지 조회시(2번째부터) 이전 조회 Output CTX_AREA_NK200 값 그대로 셋팅
+   */
+  CTX_AREA_NK200: string;
+}
+
 export interface Response {
   /**
    * 성공 실패 여부 - 0 : 성공 / 0 이외의 값 : 실패
@@ -166,9 +277,35 @@ export interface BalanceResponse extends Response {
   output2: object[];
 }
 
+export interface OverseasBalanceResponse extends Response {
+  /**
+   * 연속조회검색조건200
+   */
+  CTX_AREA_FK200: string;
+  /**
+   * 연속조회키200
+   */
+  CTX_AREA_NK200: string;
+  /**
+   * 응답상세1
+   */
+  output1: object[];
+  /**
+   * 응답상세2
+   */
+  output2: object[];
+}
+
 export interface OrderResponse extends Response {
   /**
    * 응답상세
    */
   output: object[];
+}
+
+export interface GetOverseasDayOrNightResponse extends Response {
+  /**
+   * 응답상세
+   */
+  output: { "PSBL_YN": string };
 }
