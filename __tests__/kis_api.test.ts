@@ -10,6 +10,7 @@ const getDataFromJsonFile = (filename: string) =>
   JSON.parse(fs.readFileSync(__dirname + `/fixtures/${filename}.json`, "utf8"));
 
 const balanceData = getDataFromJsonFile("balance");
+const tickerPriceData = getDataFromJsonFile("ticker_price");
 const newOrderData = getDataFromJsonFile("new_order");
 const cancelOrderData = getDataFromJsonFile("cancel_order");
 const newOrderOverseasData = getDataFromJsonFile("new_order_overseas");
@@ -36,6 +37,12 @@ test("balance", async () => {
   const getBalance = await client.balance(balanceData);
   console.log(getBalance);
   expect(getBalance).toEqual(expect.any(Object));
+});
+
+test("tickerPrice", async () => {
+  const getTickerPrice = await client.tickerPrice(tickerPriceData);
+  console.log(getTickerPrice);
+  expect(getTickerPrice).toEqual(expect.any(Object));
 });
 
 test("newOrder", async () => {

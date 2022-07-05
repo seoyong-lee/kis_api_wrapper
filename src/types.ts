@@ -258,6 +258,13 @@ export interface Response {
   msg1: string;
 }
 
+export interface PriceResponse extends Response {
+  /**
+   * 응답상세
+   */
+  output: object;
+}
+
 export interface BalanceResponse extends Response {
   /**
    * 연속조회검색조건100
@@ -308,4 +315,15 @@ export interface GetOverseasDayOrNightResponse extends Response {
    * 응답상세
    */
   output: { "PSBL_YN": string };
+}
+
+export interface tickerPriceParams {
+  /**
+   * FID 조건 시장 분류 코드 -	J : 주식, ETF, ETN
+   */
+  FID_COND_MRKT_DIV_CODE: string;
+  /**
+   * FID 입력 종목코드 - 종목번호 (6자리)
+   */
+  FID_INPUT_ISCD: string;
 }

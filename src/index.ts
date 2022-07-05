@@ -5,18 +5,17 @@ import {
   NewOrderParams,
   NewReservedOrderOverseasParams,
   OverseasBalanceParams,
+  tickerPriceParams,
 } from "./types";
-import {
-  GetTokenResponse,
-  getToken,
-} from "./services/account/GetToken.service";
-import { getBalance } from "./services/account/Balance.service";
-import { newOrder } from "./services/orders/NewOrder.service";
-import { cancelOrder } from "./services/orders/CancelOrder.service";
-import { newOrderOverseas } from "./services/orders_overseas/NewOrderOverseas.service";
-import { newReservedOrderOverseas } from "./services/orders_overseas/NewReservedOrderOverseas.service";
-import { getOverseasBalance } from "./services/account/OverseasBalance.service";
-import { getOverseasDayOrNight } from "./services/account/GetOverseasDayOrNight.service";
+import { GetTokenResponse, getToken } from "./services/account/getToken";
+import { getBalance } from "./services/account/getBalance";
+import { newOrder } from "./services/orders/NewOrder";
+import { cancelOrder } from "./services/orders/cancelOrder";
+import { newOrderOverseas } from "./services/orders_overseas/NewOrderOverseas";
+import { newReservedOrderOverseas } from "./services/orders_overseas/NewReservedOrderOverseas";
+import { getOverseasBalance } from "./services/account/getOverseasBalance";
+import { getOverseasDayOrNight } from "./services/account/getOverseasDayOrNight";
+import { getTickerPrice } from "./services/markets/getTickerPrice";
 
 /**
  * KIS
@@ -62,6 +61,23 @@ export class KIS {
    */
   balance = (params: BalanceParams) =>
     getBalance(this.appkey, this.appsecret, this.token, this.isTest, params);
+
+  /**
+   * tickerPrice
+   * 주식현재가 시세
+   *
+   * API endpoint: GET /uapi/domestic-stock/v1/quotations/inquire-price
+   *
+   * @param params 요청 값
+   */
+  tickerPrice = (params: tickerPriceParams) =>
+    getTickerPrice(
+      this.appkey,
+      this.appsecret,
+      this.token,
+      this.isTest,
+      params
+    );
 
   /**
    * newOrder

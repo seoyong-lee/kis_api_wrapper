@@ -5,7 +5,7 @@ import {
   getTrIdForOverseasBalance,
   getUrlPrefix,
 } from "../../utils";
-import { getOverseasDayOrNight } from "./GetOverseasDayOrNight.service";
+import { getOverseasDayOrNight } from "./getOverseasDayOrNight";
 
 /**
  * getOverseasBalance

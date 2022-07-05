@@ -1,15 +1,11 @@
 import axios from "axios";
-import { NewOrderOverseasParams, OrderResponse } from "../../types";
-import {
-  getHeaderBase,
-  getTrIdForNewOrderOverseas,
-  getUrlPrefix,
-} from "../../utils";
-import { getHashkey } from "../account/GetHashkey.service";
+import { CancelOrderParams, OrderResponse } from "../../types";
+import { getHeaderBase, getTrId, getUrlPrefix } from "../../utils";
+import { getHashkey } from "../account/getHashkey";
 
 /**
- * newOrderOverseas
- * 해외주식 주문
+ * cancelOrder
+ * 주식주문(정정취소)
  *
  * @param appkey 앱키
  * @param appsecret 앱시크릿키
@@ -17,12 +13,12 @@ import { getHashkey } from "../account/GetHashkey.service";
  * @param isTest 모의투자 여부
  * @param params 요청값
  */
-export const newOrderOverseas = async (
+export const cancelOrder = async (
   appkey: string,
   appsecret: string,
   token: string | undefined,
   isTest: boolean,
-  params: NewOrderOverseasParams
+  params: CancelOrderParams
 ): Promise<OrderResponse> => {
   if (!token) {
     return;
@@ -30,17 +26,13 @@ export const newOrderOverseas = async (
 
   const headers = {
     ...getHeaderBase(token, appkey, appsecret),
-    "tr_id": getTrIdForNewOrderOverseas(
-      params.SLL_TYPE,
-      params.OVRS_EXCG_CD,
-      isTest
-    ),
+    "tr_id": getTrId("cancelOrder", isTest),
     "hashkey": await getHashkey(appkey, appsecret, params, isTest),
   };
 
   try {
     const { data } = await axios.post(
-      `${getUrlPrefix(isTest)}/uapi/overseas-stock/v1/trading/order`,
+      `${getUrlPrefix(isTest)}/uapi/domestic-stock/v1/trading/order-rvsecncl`,
       params,
       { headers }
     );
